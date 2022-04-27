@@ -57,20 +57,26 @@ def train_perceptron(initial_w, train_x, train_y, epochs, batch_size, learning_r
     for i in range(epochs):
         trained_w = epoch(train_x, train_y, initial_w, batch_size, learning_rate)
 
-        print(trained_w)
-    return
+        # print(trained_w)
+    return trained_w
 
-def evaluate_perceptron():
-
+def evaluate_perceptron(X, Y, w):
+    prediction = sigmoid(np.dot(X,w))
+    # breakpoint()
+    # print(prediction)
+    loss = ((sigmoid(np.dot(x, w))-y)**2 for x, y in zip(X, Y))
+    print(loss)
     return
 # ----------------------------------------------------------------------------------------------------------------------
 #               5.3 TRAINING
 # ----------------------------------------------------------------------------------------------------------------------
 def run_perceptron():
     data, labels = dataset_reader('DATA/rt-polarity.dev.vecs')
+    np.random.seed(seed=42)
     w = np.random.normal(0, 1, (vector_dim + 1))
     print('Run perceptron with initial parameters: ')
-    train_perceptron(w, data, labels, epochs=50, batch_size=10, learning_rate=0.01)
+    trained_w = train_perceptron(w, data, labels, epochs=50, batch_size=10, learning_rate=0.01)
+    evaluate_perceptron(data, labels, trained_w)
 
 
 
