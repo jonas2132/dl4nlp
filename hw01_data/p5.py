@@ -10,7 +10,7 @@ def dataset_reader(dataset):
     file = open(dataset, mode='r')
     file_length = sum(1 for line in file)
     data = np.empty((file_length, vector_dim + 1))
-    labels = np.empty((file_length,1))
+    labels = np.empty((file_length))
     file.seek(0)
 
     for i, line in enumerate(file):
@@ -62,9 +62,14 @@ def train_perceptron(initial_w, train_x, train_y, epochs, batch_size, learning_r
 
 def evaluate_perceptron(X, Y, w):
     prediction = sigmoid(np.dot(X,w))
-    # breakpoint()
+    predictions_discrete = [np.rint(pred) for pred in prediction]
+    breakpoint()
     # print(prediction)
-    loss = ((sigmoid(np.dot(x, w))-y)**2 for x, y in zip(X, Y))
+    difference = prediction - Y
+    loss = np.sum(np.power(difference, 2), dtype=float)
+    accuracy = sum([pred == y for pred, y in zip(predictions_discrete, Y)]) / len(Y)
+
+    # breakpoint()
     print(loss)
     return
 # ----------------------------------------------------------------------------------------------------------------------
@@ -72,6 +77,7 @@ def evaluate_perceptron(X, Y, w):
 # ----------------------------------------------------------------------------------------------------------------------
 def run_perceptron():
     data, labels = dataset_reader('DATA/rt-polarity.dev.vecs')
+    # breakpoint()
     np.random.seed(seed=42)
     w = np.random.normal(0, 1, (vector_dim + 1))
     print('Run perceptron with initial parameters: ')
