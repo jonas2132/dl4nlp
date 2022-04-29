@@ -63,14 +63,15 @@ def train_perceptron(initial_w, train_x, train_y, epochs, batch_size, learning_r
 def evaluate_perceptron(X, Y, w):
     prediction = sigmoid(np.dot(X,w))
     predictions_discrete = [np.rint(pred) for pred in prediction]
-    breakpoint()
+    # breakpoint()
     # print(prediction)
     difference = prediction - Y
-    loss = np.sum(np.power(difference, 2), dtype=float)
+    loss = np.sum(np.power(difference, 2), dtype=float)/ len(Y)
     accuracy = sum([pred == y for pred, y in zip(predictions_discrete, Y)]) / len(Y)
 
     # breakpoint()
-    print(loss)
+    print('Loss: ' + str(loss))
+    print('Accuracy :' + str(accuracy))
     return
 # ----------------------------------------------------------------------------------------------------------------------
 #               5.3 TRAINING
@@ -81,7 +82,7 @@ def run_perceptron():
     np.random.seed(seed=42)
     w = np.random.normal(0, 1, (vector_dim + 1))
     print('Run perceptron with initial parameters: ')
-    trained_w = train_perceptron(w, data, labels, epochs=50, batch_size=10, learning_rate=0.01)
+    trained_w = train_perceptron(w, data, labels, epochs=400, batch_size=50, learning_rate=0.05)
     evaluate_perceptron(data, labels, trained_w)
 
 

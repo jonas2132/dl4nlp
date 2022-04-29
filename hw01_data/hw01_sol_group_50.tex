@@ -1,0 +1,79 @@
+%% This is file `DEMO-TUDaExercise.tex' version 3.25 (2022/04/27),
+%% it is part of
+%% TUDa-CI -- Corporate Design for TU Darmstadt
+%% ----------------------------------------------------------------------------
+%%
+%%  Copyright (C) 2018--2022 by Marei Peischl <marei@peitex.de>
+%%
+%% ============================================================================
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3c
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%% http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2008/05/04 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainers of this work are
+%%   Marei Peischl <tuda-ci@peitex.de>
+%%   Markus Lazanowski <latex@ce.tu-darmstadt.de>
+%%
+%% The development respository can be found at
+%% https://github.com/tudace/tuda_latex_templates
+%% Please use the issue tracker for feedback!
+%%
+%% If you need a compiled version of this document, have a look at
+%% http://mirror.ctan.org/macros/latex/contrib/tuda-ci/doc
+%% or at the documentation directory of this package (if installed)
+%% <path to your LaTeX distribution>/doc/latex/tuda-ci
+%% ============================================================================
+%%
+% !TeX program = lualatex
+%%
+
+\documentclass[
+	ngerman,
+	points=true,% für die Aktivierung der Punktereferenzen funktioniert nicht für TeX Versionen vor 2020
+	]{tudaexercise}
+
+\usepackage[english, main=ngerman]{babel}
+\usepackage[autostyle]{csquotes}
+
+\usepackage{biblatex}
+\bibliography{DEMO-TUDaBibliography}
+
+%Formatierungen für Beispiele in diesem Dokument. Im Allgemeinen nicht notwendig!
+\let\file\texttt
+\let\code\texttt
+\let\pck\textsf
+\let\cls\textsf
+\let\tbs\textbackslash
+
+\usepackage{booktabs}% Erweiterte möglichkeiten beim Spacing um Linien in Tabellen
+\renewcommand*{\creditformatsum}[1]{\creditformat{Gesamt: #1}}
+
+\ConfigureHeadline{
+	headline={title-name-id}
+}
+
+\begin{document}
+
+\title[Übung TUDaExercise]{Deep Learning for NLP 2021
+	Homework 1}
+\author{Group 50 - David Kösters und Jonas Rudolph}
+\term{Summer semester 2022}
+
+\maketitle
+\section*{2. Sigmoid Activation Function}
+\section*{3.1 Cicular Dataset}
+Although single-layer perceptrons are only capable of learning linearly separable patterns, with the right input features the perceptron is able to learn a good discriminator for the circular dataset in the TensorFlow Playground. But in the given Figure with data point distributed in a 2-dimensional space it shouldn't be possible to discriminate the two classes.
+\section*{3.2 MLP}
+Increasing the number of neurons from hidden layer to hidden layer towards the output seems to result in the worst results and slowest convergence. Although an equal number of neurons in each hidden layer leads to better results, placing more neurons towards the input a decreasing the number of neurons in each consecutive hidden layer results in the fastest convergence and produces the best results. This might be due to the fact that some input information will get lost when placing too little neurons towards the input of the network as well as neurons not having a chance to focus on and „learn“ specific key features which are needed to predict the labels accurately.
+\section*{4. Softmax}
+Because the softmax activation function utilizes an exponential normalization (e.g. to represent the relative probability of an output), the function is not applied locally at one neuron but rather incorporates information from all neurons in a given hidden layer.
+
+
+
+\end{document}
